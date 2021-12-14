@@ -56,7 +56,28 @@ console.log(dylan.sayName())
 console.log(mark.sayName())
 
 
-// Encapsulation - TBC
+// Encapsulation
+let person = {
+  name: "Default name",
+  setName: function (value) {
+    let exp = new RegExp(/\d+/);
+    if (exp.test(value)) {
+      alert("Invalid Name");
+    } else {
+      this.name = value;
+    }
+  },
+  getName: function () {
+    return this.name;
+  },
+};
+
+alert(person.getName()); // Default name
+person.setName("Another name");
+alert(person.getName()); // Another name
+person.setName(24); // Invalid Name
+alert(person.getName()); // Another name
+
 
 
 // Polymorphism
