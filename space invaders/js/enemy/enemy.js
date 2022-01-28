@@ -1,26 +1,28 @@
-class InvaderFrst {
-    constructor() {}
+class Invader extends Entity {
+  constructor(x, y) {
+    super(x, y);
+  }
 
-    move() {}
-    shoot() {}
+  move() {}
+  shoot() {}
 }
 
-class InvaderSec {
-    constructor() {}
+// class InvaderSec {
+//     constructor() {}
 
-    move() {}
-    shoot() {}
-}
+//     move() {}
+//     shoot() {}
+// }
 
-class InvaderThrd {
-    constructor() {}
+// class InvaderThrd {
+//     constructor() {}
 
-    move() {}
-    shoot() {}
-}
+//     move() {}
+//     shoot() {}
+// }
 
 class Ufo {
-    constructor() {}
+  constructor() {}
 
-    move() {}
+  move() {}
 }
