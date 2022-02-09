@@ -1,27 +1,48 @@
 class Player extends Entity {
-  constructor(x, y) {
-    super(x, y);
 
+  /**
+   * Singleton instance
+   */
+  static instance;
+
+
+  constructor(position) {
+    super(position);
     this.element.style.top = "";
     this.element.style.bottom = "0px";
-
     this.element.className = "player";
 
+    /**
+     * Add keyboard event listener 
+     * Tracks user input (move DOM object left/right)
+     */
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
         case "ArrowLeft":
-          this.element.style.left =
-            parseInt(this.element.style.left) - 20 + "px";
+          this.move(-20)
           break;
         case "ArrowRight":
-          this.element.style.left =
-            parseInt(this.element.style.left) + 20 + "px";
+          this.move(20);
           break;
       }
     });
   }
 
-  move() {}
+  /**
+   * `Singleton` get method
+   */
+  static getInstance() {
+    /**
+    *  Check to ensure that there is only ONE object
+    *  of this class has been created(per application)
+    */
+    if (!this.instance) {
+      this.instance = new Player({ x: 850, y: 900 });
+    }
 
-  shoot() {}
+    return this.instance;
+  }
 }
+
+
+

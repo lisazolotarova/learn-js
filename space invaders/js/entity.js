@@ -1,36 +1,41 @@
 class Entity {
-  x = 0;
-  y = 0;
+
+  /**
+   * Sprite coordinates (NOT Css, just internal state)
+   */
+  position = {
+    x: 0,
+    y: 0
+  }
+
+  /**
+   * Reference to the HTML element
+   */
   element;
 
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-
+  constructor(position) {
+    this.position = position;
     this.element = document.createElement("div");
     document.body.appendChild(this.element);
-    this.element.style.left = this.x + "px";
-    this.element.style.top = this.y + "px";
   }
 
+  /**
+   * Actually updating CSS styles
+   */
   draw() {
-    // this.element.style.left = this.x;
-    // this.element.style.top = this.y;
+    this.element.style.left = `${this.position.x}px`;
+    this.element.style.top = `${this.position.y}px`;
   }
 
+  /**
+   * Updates state of object position
+   */
   move(divX, divY) {
-    this.x = this.x + divX;
-    this.y += divY;
+    this.position.x += divX;
+    this.position.y += divY;
 
-    this.element.style.left = this.x + "px";
-    this.element.style.top = this.y + "px";
-
-    // window.addEventListener("load", () => {
-    //   enemy.style.position = "absolute";
-    //   enemy.style.left = 0;
-    //   enemy.style.top = 0;
-    // });
+    this.draw();
   }
 
-  shoot() {}
+  shoot() { }
 }
