@@ -1,28 +1,26 @@
 class Invader extends Entity {
   constructor(x, y) {
     super(x, y);
+    this.element.className = "invader";
   }
 
-  move() {}
+  //   move() {
+  //     let enemy = document.querySelector(".invader");
+  //   }
+
   shoot() {}
-}
 
-// class InvaderSec {
-//     constructor() {}
+  // class InvaderSec {
+  //     constructor() {}
 
-//     move() {}
-//     shoot() {}
-// }
+  //     move() {}
+  //     shoot() {}
+  // }
 
-// class InvaderThrd {
-//     constructor() {}
+  // class InvaderThrd {
+  //     constructor() {}
 
-//     move() {}
-//     shoot() {}
-// }
-
-class Ufo {
-  constructor() {}
-
-  move() {}
+  //     move() {}
+  //     shoot() {}
+  // }
 }

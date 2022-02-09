@@ -22,5 +22,9 @@
 //     }
 // }
 
-let invader = new Invader(1, 1);
-invader.draw();
+// let enemy = new Invader(1, 1);
+// enemy.draw();
+// enemy.move();
+
+let controller = new Controller();
+controller.startGame();
