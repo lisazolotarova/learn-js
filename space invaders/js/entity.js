@@ -1,12 +1,11 @@
 class Entity {
-
   /**
    * Sprite coordinates (NOT Css, just internal state)
    */
   position = {
     x: 0,
-    y: 0
-  }
+    y: 0,
+  };
 
   /**
    * Reference to the HTML element
@@ -31,11 +30,16 @@ class Entity {
    * Updates state of object position
    */
   move(divX, divY) {
-    this.position.x += divX;
-    this.position.y += divY;
+    if (divX !== undefined) {
+      this.position.x += divX;
+    }
+
+    if (divY !== undefined) {
+      this.position.y += divY;
+    }
 
     this.draw();
   }
 
-  shoot() { }
+  shoot() {}
 }

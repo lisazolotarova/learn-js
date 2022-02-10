@@ -2,12 +2,14 @@ class Controller {
   // array of enemies
   enemies = [];
 
+  // array of bullets
+  bullets = [];
+
   // move distance
   enemyMoveDistance = 10;
 
   // player instance
-  player = Player.getInstance();
-
+  player = Player.getInstance(this);
 
   /**
    *  Creates array of invaders
@@ -35,6 +37,8 @@ class Controller {
    * Main game loop
    */
   update() {
+    //------------------move invaders---------------------
+
     let first = this.enemies[0];
     let last = this.enemies[this.enemies.length - 1];
 
@@ -51,9 +55,15 @@ class Controller {
       this.enemyMoveDistance = 10;
     }
 
-    // just draw each invader 
+    // just draw each invader
     this.enemies.forEach((enemy, index) => {
       enemy.move(this.enemyMoveDistance, 0);
+    });
+    //---------------------------------------
+
+    //-------------------move bullets--------------------
+    this.bullets.forEach((bullet) => {
+      bullet.move();
     });
   }
 }

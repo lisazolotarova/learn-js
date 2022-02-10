@@ -1,5 +1,7 @@
 class Invader extends Entity {
-  constructor(position) {
+  type;
+
+  constructor(position, type) {
     super(position);
     this.element.className = "invader";
   }

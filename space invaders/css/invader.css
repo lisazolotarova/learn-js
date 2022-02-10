@@ -1,6 +1,12 @@
 .invader {
-  width: 40px;
-  height: 40px;
-  background-color: black;
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
   position: absolute;
+  background-image: url("../assets/Ship/8.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  transform: rotate(180deg);
 }
