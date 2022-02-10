@@ -1,7 +1,7 @@
 const invaderMarginTop = 20;
 class Controller {
   // array of enemies
-  enemies = [];
+  invaders = [];
 
   // array of bullets
   bullets = [];
@@ -41,7 +41,7 @@ class Controller {
    */
   createInvaders() {
     for (let i = 0; i < 8; i++) {
-      this.enemies.push(
+      this.invaders.push(
         new Invader({ x: conf.invaderSize.width * i, y: invaderMarginTop })
       );
     }
@@ -60,6 +60,18 @@ class Controller {
     var intervalID = setInterval(this.mainGameLoop, conf.refreshRate);
   }
 
+  detectCollision(obj1, obj2) {
+    if (
+      obj1.position.x < obj2.position.x + obj2.element.offsetWidth &&
+      obj1.position.x + obj1.element.offsetWidth > obj2.position.x &&
+      obj1.position.y < obj2.position.y + obj2.element.offsetHeight &&
+      obj1.position.y + obj1.element.offsetHeight > obj2.position.y
+    ) {
+      console.log("collision");
+      return true;
+    } else return false;
+  }
+
   /**
    * Main game loop
    */
@@ -76,8 +88,8 @@ class Controller {
     }
 
     //------------------move invaders---------------------
-    let first = this.enemies[0];
-    let last = this.enemies[this.enemies.length - 1];
+    let first = this.invaders[0];
+    let last = this.invaders[this.invaders.length - 1];
 
     // switch direction of enemies movement
     if (
@@ -91,25 +103,45 @@ class Controller {
     }
 
     // just draw each invader
-    this.enemies.forEach((enemy, index) => {
+    this.invaders.forEach((enemy, index) => {
       enemy.move(conf.invaderMoveSpeed, 0);
     });
     //---------------------------------------
 
     /**
-     * Filter bullets that are out of screen 
-     * and call die() method 
+     * Filter bullets that are out of screen
+     * and call die() method
      */
-    this.bullets.filter((bullet) => bullet.position.y <= 0).map(bullet => bullet.die())
-    
+    this.bullets
+      .filter((bullet) => bullet.position.y <= 0)
+      .map((bullet) => bullet.die());
+
     /**
-     * Filter only bullets that are currently on screen 
+     * Filter only bullets that are currently on screen
      */
-    this.bullets = this.bullets.filter((bullet) => bullet.position.y > 0)
-    
+    this.bullets = this.bullets.filter((bullet) => bullet.position.y > 0);
+
     //-------------------move bullets--------------------
     this.bullets.forEach((bullet) => {
       bullet.move();
+    });
+
+    /**
+     * collision detection
+     *
+     * Check for each invader if it is colliding with each bullet
+     */
+    this.invaders.forEach((invader) => {
+      this.bullets.forEach((bullet) => {
+        let collide = this.detectCollision(invader, bullet);
+
+        // if collision is true, remove both objects from dom
+        if (collide) {
+          invader.die();
+          bullet.die();
+          // TODO: remove this obj form arrays `invaders` and `bullets`
+        }
+      });
     });
   }
 }
