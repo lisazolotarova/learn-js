@@ -4,45 +4,25 @@ class Player extends Entity {
    */
   static instance;
 
-  controller;
+  createBullet;
 
-  constructor(position, controller) {
+  constructor(position, createBullet) {
     super(position);
-    this.element.style.top = "";
-    this.element.style.bottom = "0px";
     this.element.className = "player";
-
-    this.controller = controller;
-
-    /**
-     * Add keyboard event listener
-     * Tracks user input (move DOM object left/right)
-     */
-    window.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "ArrowLeft":
-          this.move(-20);
-          break;
-        case "ArrowRight":
-          this.move(20);
-          break;
-        case " ":
-          this.shoot();
-      }
-    });
+    this.createBullet = createBullet;
   }
 
   shoot() {
     let bullet = new Shoot(
       {
         y: this.position.y,
-        x: this.position.x + 20,
+        x: this.position.x + conf.playerSize.width / 2,
       },
       "UP"
     );
 
     bullet.draw();
-    this.controller.bullets.push(bullet);
+    this.createBullet(bullet);
   }
 
   /**
@@ -54,7 +34,11 @@ class Player extends Entity {
      *  of this class has been created(per application)
      */
     if (!this.instance) {
-      this.instance = new Player({ x: 850, y: 900 }, controller);
+      this.instance = new Player(
+        // calculate player position based on window dimensions 
+        { x: window.innerWidth / 2, y: window.innerHeight - 120 },
+        controller
+      );
     }
 
     return this.instance;

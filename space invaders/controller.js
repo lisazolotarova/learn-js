@@ -1,3 +1,4 @@
+const invaderMarginTop = 20;
 class Controller {
   // array of enemies
   enemies = [];
@@ -5,18 +6,44 @@ class Controller {
   // array of bullets
   bullets = [];
 
-  // move distance
-  enemyMoveDistance = 10;
-
   // player instance
-  player = Player.getInstance(this);
+  player;
+
+  activeKeys = {};
+
+  constructor() {
+    this.addBullet = this.addBullet.bind(this);
+    this.mainGameLoop = this.mainGameLoop.bind(this);
+
+    this.player = Player.getInstance(this.addBullet);
+
+    /**
+     * Add keyboard event listener
+     * Tracks user input (move DOM object left/right)
+     */
+    window.addEventListener("keydown", (e) => {
+      let keyName = e.key == " " ? "SpaceBar" : e.key;
+      this.activeKeys[keyName] = true;
+    });
+
+    window.addEventListener("keyup", (e) => {
+      let keyName = e.key == " " ? "SpaceBar" : e.key;
+      this.activeKeys[keyName] = false;
+    });
+  }
+
+  addBullet(bullet) {
+    this.bullets.push(bullet);
+  }
 
   /**
    *  Creates array of invaders
    */
-  drawInvaders() {
+  createInvaders() {
     for (let i = 0; i < 8; i++) {
-      this.enemies.push(new Invader({ x: 80 * i, y: 20 }));
+      this.enemies.push(
+        new Invader({ x: conf.invaderSize.width * i, y: invaderMarginTop })
+      );
     }
   }
 
@@ -25,42 +52,61 @@ class Controller {
    */
   startGame() {
     this.player.draw();
-    this.drawInvaders();
+    this.createInvaders();
 
-    this.update = this.update.bind(this);
-    var intervalID = setInterval(this.update, 16);
-
-    console.log(this.enemies);
+    /**
+     * Sets interval to run mainGameLoop() method every 16ms
+     */
+    var intervalID = setInterval(this.mainGameLoop, conf.refreshRate);
   }
 
   /**
    * Main game loop
    */
-  update() {
-    //------------------move invaders---------------------
+  mainGameLoop() {
+    //------------------keyboard reactions---------------------
+    if (this.activeKeys["ArrowLeft"]) {
+      this.player.move(-conf.playerMoveSpeed);
+    }
+    if (this.activeKeys["ArrowRight"]) {
+      this.player.move(conf.playerMoveSpeed);
+    }
+    if (this.activeKeys["SpaceBar"]) {
+      this.player.shoot();
+    }
 
+    //------------------move invaders---------------------
     let first = this.enemies[0];
     let last = this.enemies[this.enemies.length - 1];
 
     // switch direction of enemies movement
     if (
       // condition to change direction to the LEFT
-      this.enemyMoveDistance > 0 &&
-      last.position.x + last.element.offsetWidth >= window.innerWidth
+      (conf.invaderMoveSpeed > 0 &&
+        last.position.x + last.element.offsetWidth >= window.innerWidth) ||
+      // condition to change direction to the RIGHT
+      (conf.invaderMoveSpeed < 0 && first.position.x < 0)
     ) {
-      this.enemyMoveDistance = -10;
-    }
-    // condition to change direction to the RIGHT
-    if (this.enemyMoveDistance < 0 && first.position.x < 0) {
-      this.enemyMoveDistance = 10;
+      conf.invaderMoveSpeed *= -1;
     }
 
     // just draw each invader
     this.enemies.forEach((enemy, index) => {
-      enemy.move(this.enemyMoveDistance, 0);
+      enemy.move(conf.invaderMoveSpeed, 0);
     });
     //---------------------------------------
 
+    /**
+     * Filter bullets that are out of screen 
+     * and call die() method 
+     */
+    this.bullets.filter((bullet) => bullet.position.y <= 0).map(bullet => bullet.die())
+    
+    /**
+     * Filter only bullets that are currently on screen 
+     */
+    this.bullets = this.bullets.filter((bullet) => bullet.position.y > 0)
+    
     //-------------------move bullets--------------------
     this.bullets.forEach((bullet) => {
       bullet.move();

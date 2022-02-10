@@ -10,7 +10,10 @@ class Shoot extends Entity {
   }
 
   move() {
-    let y = this.moveDirection === "UP" ? -30 : 30;
+    let y =
+      this.moveDirection === "UP"
+        ? -conf.bulletMoveSpeed
+        : conf.bulletMoveSpeed;
 
     super.move(undefined, y);
   }

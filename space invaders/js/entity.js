@@ -42,4 +42,8 @@ class Entity {
   }
 
   shoot() {}
+
+  die() {
+    this.element.remove();
+  }
 }
