@@ -1,6 +1,6 @@
 class Explosion {
-    constructor() {}
+  constructor() {}
 
-    move() {}
-    explode() {}
+  move() {}
+  explode() {}
 }

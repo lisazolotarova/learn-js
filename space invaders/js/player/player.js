@@ -1,3 +1,6 @@
+import { Entity } from "./js/entity";
+import { Shoot } from "../shoot/shoot";
+
 class Player extends Entity {
   /**
    * Singleton instance
@@ -35,7 +38,7 @@ class Player extends Entity {
      */
     if (!this.instance) {
       this.instance = new Player(
-        // calculate player position based on window dimensions 
+        // calculate player position based on window dimensions
         { x: window.innerWidth / 2, y: window.innerHeight - 120 },
         controller
       );

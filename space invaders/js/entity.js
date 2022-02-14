@@ -1,4 +1,4 @@
-class Entity {
+export class Entity {
   /**
    * Sprite coordinates (NOT Css, just internal state)
    */

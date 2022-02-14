@@ -1,4 +1,5 @@
 const invaderMarginTop = 20;
+
 class Controller {
   // array of enemies
   invaders = [];

@@ -1,4 +1,4 @@
-class Shoot extends Entity {
+export class Shoot extends Entity {
   // could be 'UP' or 'DOWN'
   moveDirection;
 

@@ -1,3 +1,5 @@
+import { Entity } from "./js/entity.js";
+
 class Invader extends Entity {
   type;
 
