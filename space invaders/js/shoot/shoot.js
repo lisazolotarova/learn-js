@@ -1,3 +1,6 @@
+import { Entity } from "../entity.js";
+import { conf } from "../../config.js";
+
 export class Shoot extends Entity {
   // could be 'UP' or 'DOWN'
   moveDirection;

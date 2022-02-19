@@ -1,7 +1,8 @@
-import { Entity } from "./js/entity";
-import { Shoot } from "../shoot/shoot";
+import { Entity } from "../entity.js";
+import { Shoot } from "../shoot/shoot.js";
+import { conf } from "../../config.js";
 
-class Player extends Entity {
+export class Player extends Entity {
   /**
    * Singleton instance
    */

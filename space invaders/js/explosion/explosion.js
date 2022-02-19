@@ -1,4 +1,4 @@
-class Explosion {
+export class Explosion {
   constructor() {}
 
   move() {}
