@@ -31,7 +31,7 @@ export class Controller {
     this.player = Player.getInstance(this.addPlayerBullet);
 
     /**
-     * Add keyboard event listener
+     * Adds keyboard event listener
      * Tracks user input (move DOM object left/right)
      */
     window.addEventListener("keydown", (e) => {
@@ -141,7 +141,7 @@ export class Controller {
   }
 
   /**
-   * Filter bullets that are out of screen
+   * Filters bullets that are out of screen
    * and call die() method
    */
   bulletGarbageCollector() {
@@ -156,7 +156,7 @@ export class Controller {
   }
 
   /**
-   * Check if bullets collide with invaders
+   * Checks if bullets collide with invaders
    */
   shootTracking() {
     for (let i = this.invaders.length - 1; i > -1; i--) {
@@ -176,7 +176,7 @@ export class Controller {
   }
 
   updateShootInterval() {
-    // Wait for half a second before player can shoot again
+    // Waits for half a second before player can shoot again
     if (this.shootTimeOut > 0) {
       // this.shootTimeOut = this.shootTimeOut - 1;
       // this.shootTimeOut -= 1;

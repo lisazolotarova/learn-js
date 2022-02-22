@@ -16,23 +16,19 @@ export class Invader extends Entity {
     setInterval(this.shoot, conf.difficulty.invaderShootInterval);
   }
 
-  // TODO:  Move shot logic to the main controller ( let him decide which invader is
-  // shooting right now )
+  // TODO:  Move shoot logic to the main controller. Implement one shoot per invader
   shoot() {
     let shootProbability = Math.random();
 
     if (shootProbability > 0.8) {
-      let bullet = new Shoot(
-        {
-          y: this.position.y + this.element.offsetHeight,
-          x: this.position.x + conf.invaderSize.width / 2,
-        },
-        "DOWN"
-      );
+      let bullet = new Shoot({
+        y: this.position.y + this.element.offsetHeight,
+        x: this.position.x + conf.invaderSize.width / 2,
+      });
 
       bullet.draw();
 
-      // this.createBullet(bullet);
+      this.createBullet(bullet);
     }
 
     return bullet;
