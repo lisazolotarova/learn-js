@@ -14,6 +14,3 @@ function getPosition(p) {
 }
 
 console.log(getPosition({ x: 0, y: 0 }));
-
-
-

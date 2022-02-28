@@ -10,4 +10,4 @@ function func(str) {
   return symbolsCounter;
 }
 
-console.log(func("a b c"));
+console.log(func("a a b c"));

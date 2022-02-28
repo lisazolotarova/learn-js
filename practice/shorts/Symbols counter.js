@@ -12,4 +12,4 @@ function func(str) {
   return symbolsCounter;
 }
 
-console.log(func("lisaa"));
+console.log(func("wooord"));
