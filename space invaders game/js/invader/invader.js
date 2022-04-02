@@ -17,6 +17,7 @@ export class Invader extends Entity {
   }
 
   // TODO:  Move shoot logic to the main controller. Implement one shoot per invader
+
   shoot() {
     let shootProbability = Math.random();
 
@@ -31,6 +32,6 @@ export class Invader extends Entity {
       this.createBullet(bullet);
     }
 
-    return bullet;
+    // return bullet;
   }
 }
