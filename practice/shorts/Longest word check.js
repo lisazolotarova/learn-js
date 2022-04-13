@@ -23,4 +23,4 @@ function func(str) {
   return maxValue;
 }
 
-console.log(func("abc abc D ghjk"));
+// console.log(func("abc abc D ghjk"));

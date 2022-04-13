@@ -27,34 +27,33 @@ chips.prototype = Object.create(junkFood.prototype);
 const pringles = new chips();
 console.log(pringles.name);
 
-// 3 
+// 3
 class Person {
   constructor(name) {
     this.name = name;
   }
 
   sayName() {
-    return 'Hey there, I am ' + this.name;
+    return "Hey there, I am " + this.name;
   }
 }
 
 class Men extends Person {
   constructor(name) {
-    super(name)
+    super(name);
   }
 }
 class RandomGuy extends Person {
   constructor(name) {
-    super(name)
+    super(name);
   }
 }
 
-const dylan = new Men('Dylan');
-const mark = new RandomGuy('Mark');
+const dylan = new Men("Dylan");
+const mark = new RandomGuy("Mark");
 
-console.log(dylan.sayName()) 
-console.log(mark.sayName())
-
+console.log(dylan.sayName());
+console.log(mark.sayName());
 
 // Encapsulation
 let person = {
@@ -77,8 +76,6 @@ person.setName("Another name");
 alert(person.getName()); // Another name
 person.setName(24); // Invalid Name
 alert(person.getName()); // Another name
-
-
 
 // Polymorphism UPDATED
 class DogBreed {
