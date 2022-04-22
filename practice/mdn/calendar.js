@@ -4,7 +4,7 @@ var h1 = document.querySelector("h1");
 
 select.onchange = function () {
   var choice = select.value;
-
+  var days = 31;
   if (choice === "Feb") {
     days = 28;
   } else if (
@@ -13,7 +13,7 @@ select.onchange = function () {
     choice === "Sep" ||
     choice === "Nov"
   ) {
-    days = 31;
+    days = 30;
   }
 
   createCalendar(days, choice);
